@@ -1,0 +1,47 @@
+parameters:
+- name: 'PathtoPublish'
+  type: string
+  default: '$(Build.ArtifactStagingDirectory)'
+
+- name: 'ArtifactName'
+  type: string
+
+
+- name: 'publishLocation'
+  type: string
+  default: 'Container'
+
+- name: 'MaxArtifactSize'
+  type: string
+  default: '0'
+
+- name: 'TargetPath'
+  type: string
+  default: ''
+
+- name: 'Parallel'
+  type: boolean
+  default: false
+
+- name: 'ParallelCount'
+  type: string
+  default: '8'
+
+- name: 'StoreAsTar'
+  type: boolean
+  default: false
+
+steps:
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: ${{parameters.PathtoPublish}}
+    ArtifactName: ${{parameters.ArtifactName}}
+    publishLocation: ${{parameters.publishLocation}}
+    MaxArtifactSize: ${{parameters.MaxArtifactSize}}
+    TargetPath: ${{parameters.TargetPath}}
+    Parallel: ${{parameters.Parallel}}
+    ParallelCount: ${{parameters.ParallelCount}}
+    StoreAsTar: ${{parameters.StoreAsTar}}
+  name: PublishBuildArtifacts
+  displayName: "Publish Build Artifacts Task"
